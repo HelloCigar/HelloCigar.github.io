@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Valorant Wiki</title>
+	<link href="https://fonts.cdnfonts.com/css/valorant" rel="stylesheet">
+</head>
+	<script type="text/javascript">
+		// fetch valorant api then display each characters in a card inside a div
+		fetch('https://valorant-api.com/v1/agents')
+		.then(response => response.json())
+		.then(data => {
+			// populate card with information of each character
+			data.data.forEach(character => {
+				if(character.isPlayableCharacter==false){
+					return;
+				}
+				// get body
+				const body = document.querySelector('body')
+				// create card
+				const card = document.createElement('div')
+				card.setAttribute('class', 'card')
+				card.setAttribute('id', character.displayName)
+				// create image
+				const img = document.createElement('img')
+				img.src = character.displayIcon
+				// create name
+				const h1 = document.createElement('h1')
+				h1.textContent = character.displayName
+				// create description
+				const p = document.createElement('p')
+				p.textContent = character.description
+				// create role
+				const h2 = document.createElement('h2')
+				h2.textContent = "Role: " + character.role.displayName
+				const img0 = document.createElement('img')
+				img0.src = character.role.displayIcon
+				img0.setAttribute('class', 'role')
+				// create abilities
+				const p3 = document.createElement('p')
+				const p4 = document.createElement('p')
+				const p5 = document.createElement('p')
+				const p6 = document.createElement('p')
+				p3.textContent = "Ability 1: " + character.abilities[0].displayName
+				p4.textContent = "Ability 2: " + character.abilities[1].displayName
+				p5.textContent = "Ability 3: " + character.abilities[2].displayName
+				p6.textContent = "Ultimate Ability: " + character.abilities[3].displayName
+
+				// create ability images
+				const img1 = document.createElement('img')
+				img1.src = character.abilities[0].displayIcon
+				const img2 = document.createElement('img')
+				img2.src = character.abilities[1].displayIcon
+				const img3 = document.createElement('img')
+				img3.src = character.abilities[2].displayIcon
+				const img4 = document.createElement('img')
+				img4.src = character.abilities[3].displayIcon
+
+				img1.setAttribute('class', 'ability')
+				img2.setAttribute('class', 'ability')
+				img3.setAttribute('class', 'ability')
+				img4.setAttribute('class', 'ability')
+
+
+				// append card to container
+				body.appendChild(card)
+				// append image, name, description, role, and abilities to card
+				card.appendChild(img)
+				card.appendChild(h1)
+				card.appendChild(p)
+				card.appendChild(h2)
+				card.appendChild(img0)
+				card.appendChild(p3)
+				card.appendChild(img1)
+				card.appendChild(p4)
+				card.appendChild(img2)
+				card.appendChild(p5)
+				card.appendChild(img3)
+				card.appendChild(p6)
+				card.appendChild(img4)
+
+				document.getElementById(character.displayName).style.backgroundColor = "#"+character.backgroundGradientColors[2];
+				document.getElementById(character.displayName).style.color = "#"+character.backgroundGradientColors[0];
+			})
+		})
+	</script>
+	<style type="text/css">
+		body{
+			background-color: #27272fff;
+			color: #ffffff;
+			text-align: center;
+			font-family: Arial, Helvetica, sans-serif;
+			font-weight: 400;
+			font-size: .875rem;
+		}
+		img {
+			width: 200px;
+			height: 200px;
+		}
+		div{
+			display: inline-block;
+			border: 3px solid #ff4656ff;
+			width: 30%;
+			max-height: 30%;
+			padding: 10px;
+			margin: 20px;
+		}
+		p{	
+			font-size: 1.2rem;
+		}
+
+		.ability {
+			width: 75px;
+			height: 75px;
+		}
+
+		.role {
+			width: 125px;
+			height: 125px;
+		}
+		.header{
+			font-family: 'VALORANT', sans-serif;                                 
+		}
+
+	</style>
+	<body>
+		<h1 class="header">Valorant Wiki</h1>
+		<h2 class="header">Agents</h2>
+	</body>
+</html>
